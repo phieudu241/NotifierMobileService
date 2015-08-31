@@ -15,16 +15,37 @@ namespace NotifierMobile
     public class NotifierMobileService
     {
         /// <summary>
-        /// Get notifications by type or unread
+        /// Get notifications by type
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static List<Notification> GetAll(GetModel model)
+        public static List<Notification> GetAll(Authentication authentication, int type)
+        {
+            return GetAll(authentication, type, null);
+        }
+
+        /// <summary>
+        /// Get notifications by unread
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static List<Notification> GetAll(Authentication authentication, bool unread)
+        {
+            return GetAll(authentication, null, unread);
+        }
+
+        
+        /// <summary>
+        /// Get notifications by type and unread
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static List<Notification> GetAll(Authentication authentication, int? type, bool? unread)
         {
             List<Notification> notifications = new List<Notification>();
             try
             {
-                WebRequest request = HttpHelper.createRequest(RequestType.GET_ALL, model, null);
+                WebRequest request = HttpHelper.createGetRequest(RequestType.GET_ALL, authentication, null, type, unread);
                 notifications = HttpHelper.getResponse(request);
             }
             catch (WebException)
@@ -45,12 +66,12 @@ namespace NotifierMobile
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static Notification Get(int id, GetModel model)
+        public static Notification Get(int id, Authentication authentication)
         {
             List<Notification> notifications = new List<Notification>();
             try
             {
-                WebRequest request = HttpHelper.createRequest(RequestType.GET, model, id);
+                WebRequest request = HttpHelper.createGetRequest(RequestType.GET, authentication, id, null, null);
                 notifications = HttpHelper.getResponse(request);
             }
             catch (WebException)
@@ -69,11 +90,11 @@ namespace NotifierMobile
         /// Add a new notification
         /// </summary>
         /// <param name="model"></param>
-        public static void Add(AddModel model)
+        public static void Add(Authentication authentication, AddModel model)
         {
             try
             {
-                WebRequest request = HttpHelper.createRequest(RequestType.ADD, model, null);
+                WebRequest request = HttpHelper.createRequest(RequestType.ADD, authentication, null, model);
                 HttpHelper.getResponse(request);
             }
             catch (WebException)
@@ -91,11 +112,11 @@ namespace NotifierMobile
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
-        public static void Update(int id, UpdateModel model)
+        public static void Update(int id, Authentication authentication, UpdateModel model)
         {
             try
             {
-                WebRequest request = HttpHelper.createRequest(RequestType.UPDATE, model, id);
+                WebRequest request = HttpHelper.createRequest(RequestType.UPDATE, authentication, id, model);
                 HttpHelper.getResponse(request);
             }
             catch (WebException)
@@ -114,11 +135,11 @@ namespace NotifierMobile
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
-        public static void Delete(int id, DeleteModel model)
+        public static void Delete(int id, Authentication authentication)
         {
             try
             {
-                WebRequest request = HttpHelper.createRequest(RequestType.DELETE, model, id);
+                WebRequest request = HttpHelper.createRequest(RequestType.DELETE, authentication, id, null);
                 HttpHelper.getResponse(request);
             }
             catch (WebException)
@@ -136,11 +157,11 @@ namespace NotifierMobile
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
-        public static void MarkAsRead(int id, MarkAsReadModel model)
+        public static void MarkAsRead(int id, Authentication authentication)
         {
             try
             {
-                WebRequest request = HttpHelper.createRequest(RequestType.MARK_AS_READ, model, id);
+                WebRequest request = HttpHelper.createRequest(RequestType.MARK_AS_READ, authentication, id, null);
                 HttpHelper.getResponse(request);
             }
             catch (WebException)

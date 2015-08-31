@@ -12,36 +12,33 @@ namespace Tester
         static void Main(string[] args)
         {
             GetModel model = new GetModel();
+
+            Authentication authentication = new Authentication("test", "123");
             model.Username = "test";
             model.SecretKey = "123";
-            NotifierMobileService.GetAll(model);
-            NotifierMobileService.Get(5, model);
+
+
+            //NotifierMobileService.GetAll(authentication, null, null);
+            //NotifierMobileService.Get(5, authentication);
 
             AddModel addModel = new AddModel();
-            addModel.Username = "test";
-            addModel.SecretKey = "123";
             addModel.Title = "title";
             addModel.Message = "message";
             addModel.CreateDate = DateTime.Now;
-            NotifierMobileService.Add(addModel);
+            //NotifierMobileService.Add(authentication, addModel);
             
             UpdateModel updateModel = new UpdateModel();
-            updateModel.Username = "test";
-            updateModel.SecretKey = "123";
             updateModel.Message = "update";
             updateModel.Title = "update";
             updateModel.Type = 2;
-            //NotifierMobileService.Update(12, updateModel);
+            //NotifierMobileService.Update(20, authentication, updateModel);
 
             MarkAsReadModel markModel = new MarkAsReadModel();
             markModel.Username = "test";
             markModel.SecretKey = "123";
-            //NotifierMobileService.MarkAsRead(10, markModel);
+            NotifierMobileService.MarkAsRead(5, markModel);
 
-            DeleteModel authentication = new DeleteModel();
-            authentication.Username = "test";
-            authentication.SecretKey = "123";
-            //NotifierMobileService.Delete(6, authentication);
+            NotifierMobileService.Delete(7, authentication);
 
         }
     }

@@ -11,19 +11,59 @@ namespace NotifierMobile.Utils
 {
     class HttpHelper
     {
-        public static WebRequest createRequest(RequestType type, IRequestModel model, int? id)
+        public static WebRequest createGetRequest(RequestType requestType, Authentication authentication, int? id, int? type, bool? unread)
+        {
+            HttpRequestAttr requestAttrs = (HttpRequestAttr)requestType.GetAttr();
+            WebRequest request;
+            string url = requestAttrs.URL;
+            if (id.HasValue)
+            {
+                url += ("/" + id);
+            }
+
+            url += "?username=" + authentication.Username + "&secretKey=" + authentication.SecretKey;
+
+            if (type.HasValue)
+            {
+                url += "&type=" + type.Value;
+            }
+
+            if (unread.HasValue)
+            {
+                url += "&unread=" + unread.Value;
+            }
+
+            request = WebRequest.Create(url);
+            request.Method = requestAttrs.Method;
+
+            return request;
+        }
+        
+        public static WebRequest createRequest(RequestType type, Authentication authentication, int? id, IRequestModel model)
         {
             HttpRequestAttr requestAttrs = (HttpRequestAttr) type.GetAttr();
             WebRequest request;
-            request = WebRequest.Create(requestAttrs.URL + "/" + id);
-            request.Method = requestAttrs.Method;
-            request.ContentType = "application/json";
-
-            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            string url = requestAttrs.URL;
+            if (id.HasValue)
             {
-                string json = model.GenerateJsonString();
-                streamWriter.Write(json);
+                url += ("/" + id);
             }
+
+            url += "?username=" + authentication.Username + "&secretKey=" + authentication.SecretKey;
+
+            request = WebRequest.Create(url);
+            request.Method = requestAttrs.Method;
+            if (model != null)
+            {
+                request.ContentType = "application/json";
+
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    string json = model.GenerateJsonString();
+                    streamWriter.Write(json);
+                }    
+            }
+            
 
             return request;
         }
