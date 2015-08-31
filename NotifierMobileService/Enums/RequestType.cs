@@ -16,7 +16,7 @@ namespace NotifierMobile.Enums
         ADD,
         [HttpRequestAttr(URL = APIInterface.UPDATE_URL, Method = "PUT")]
         UPDATE,
-        [HttpRequestAttr(URL = APIInterface.MARKREAD_URL, Method = "PATCH")]
+        [HttpRequestAttr(URL = APIInterface.MARKREAD_URL, Method = "PUT")]
         MARK_AS_READ,
         [HttpRequestAttr(URL = APIInterface.DELETE_URL, Method = "DELETE")]
         DELETE

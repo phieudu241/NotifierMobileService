@@ -46,9 +46,6 @@
     <Compile Include="JSON\JSONObject.cs" />
     <Compile Include="Models\AddModel.cs" />
     <Compile Include="Models\Authentication.cs" />
-    <Compile Include="Models\DeleteModel.cs" />
-    <Compile Include="Models\MarkAsReadModel.cs" />
-    <Compile Include="Models\GetModel.cs" />
     <Compile Include="Models\IRequestModel.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\UpdateModel.cs" />
