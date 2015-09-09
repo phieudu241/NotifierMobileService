@@ -17,35 +17,39 @@ namespace NotifierMobile
         /// <summary>
         /// Get notifications by type
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="authentication"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         public static List<Notification> GetAll(Authentication authentication, int type)
         {
-            return GetAll(authentication, type, null);
+            return GetAll(authentication, type, null, null);
         }
 
         /// <summary>
         /// Get notifications by unread
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="authentication"></param>
+        /// <param name="unread"></param>
         /// <returns></returns>
         public static List<Notification> GetAll(Authentication authentication, bool unread)
         {
-            return GetAll(authentication, null, unread);
+            return GetAll(authentication, null, unread, null);
         }
-
         
         /// <summary>
         /// Get notifications by type and unread
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="authentication"></param>
+        /// <param name="type"></param>
+        /// <param name="unread"></param>
+        /// <param name="fromId"></param>
         /// <returns></returns>
-        public static List<Notification> GetAll(Authentication authentication, int? type, bool? unread)
+        public static List<Notification> GetAll(Authentication authentication, int? type, bool? unread, int? fromId)
         {
             List<Notification> notifications = new List<Notification>();
             try
             {
-                WebRequest request = HttpHelper.createGetRequest(RequestType.GET_ALL, authentication, null, type, unread);
+                WebRequest request = HttpHelper.createGetRequest(RequestType.GET_ALL, authentication, null, type, unread, fromId);
                 notifications = HttpHelper.getResponse(request);
             }
             catch (WebException)
@@ -71,7 +75,7 @@ namespace NotifierMobile
             List<Notification> notifications = new List<Notification>();
             try
             {
-                WebRequest request = HttpHelper.createGetRequest(RequestType.GET, authentication, id, null, null);
+                WebRequest request = HttpHelper.createGetRequest(RequestType.GET, authentication, id, null, null, null);
                 notifications = HttpHelper.getResponse(request);
             }
             catch (WebException)

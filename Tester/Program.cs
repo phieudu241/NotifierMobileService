@@ -13,7 +13,7 @@ namespace Tester
         {
             Authentication authentication = new Authentication("test", "123");
 
-            NotifierMobileService.GetAll(authentication, null, null);
+            NotifierMobileService.GetAll(authentication, null, null, null);
             NotifierMobileService.Get(5, authentication);
 
             AddModel addModel = new AddModel();

@@ -11,7 +11,7 @@ namespace NotifierMobile.Utils
 {
     class HttpHelper
     {
-        public static WebRequest createGetRequest(RequestType requestType, Authentication authentication, int? id, int? type, bool? unread)
+        public static WebRequest createGetRequest(RequestType requestType, Authentication authentication, int? id, int? type, bool? unread, int? fromId)
         {
             HttpRequestAttr requestAttrs = (HttpRequestAttr)requestType.GetAttr();
             WebRequest request;
@@ -31,6 +31,11 @@ namespace NotifierMobile.Utils
             if (unread.HasValue)
             {
                 url += "&unread=" + unread.Value;
+            }
+
+            if (fromId.HasValue)
+            {
+                url += "&fromId=" + fromId.Value;
             }
 
             request = WebRequest.Create(url);
