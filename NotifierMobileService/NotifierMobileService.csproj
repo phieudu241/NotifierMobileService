@@ -43,6 +43,7 @@
     <Compile Include="Enums\HttpRequestAttr.cs" />
     <Compile Include="Enums\EnumExtension.cs" />
     <Compile Include="Enums\EnumAttr.cs" />
+    <Compile Include="Enums\NotificationType.cs" />
     <Compile Include="JSON\JSONObject.cs" />
     <Compile Include="Models\AddModel.cs" />
     <Compile Include="Models\Authentication.cs" />
