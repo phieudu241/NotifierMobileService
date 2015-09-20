@@ -9,6 +9,7 @@ using System.IO;
 using System.Collections.Specialized;
 using NotifierMobile.Utils;
 using NotifierMobile.Enums;
+using NotifierMobile.Exceptions;
 
 namespace NotifierMobile
 {
@@ -52,13 +53,13 @@ namespace NotifierMobile
                 WebRequest request = HttpHelper.createGetRequest(RequestType.GET_ALL, authentication, null, type, unread, fromId);
                 notifications = HttpHelper.getResponse(request);
             }
-            catch (WebException)
+            catch (WebException ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
             
             return notifications;
@@ -78,13 +79,13 @@ namespace NotifierMobile
                 WebRequest request = HttpHelper.createGetRequest(RequestType.GET, authentication, id, null, null, null);
                 notifications = HttpHelper.getResponse(request);
             }
-            catch (WebException)
+            catch (WebException ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
             
             return notifications[0];
@@ -101,13 +102,13 @@ namespace NotifierMobile
                 WebRequest request = HttpHelper.createRequest(RequestType.ADD, authentication, null, model);
                 HttpHelper.getResponse(request);
             }
-            catch (WebException)
+            catch (WebException ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
         }
 
@@ -123,13 +124,13 @@ namespace NotifierMobile
                 WebRequest request = HttpHelper.createRequest(RequestType.UPDATE, authentication, id, model);
                 HttpHelper.getResponse(request);
             }
-            catch (WebException)
+            catch (WebException ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
         }
 
@@ -146,13 +147,13 @@ namespace NotifierMobile
                 WebRequest request = HttpHelper.createRequest(RequestType.DELETE, authentication, id, null);
                 HttpHelper.getResponse(request);
             }
-            catch (WebException)
+            catch (WebException ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
         }
 
@@ -168,14 +169,42 @@ namespace NotifierMobile
                 WebRequest request = HttpHelper.createRequest(RequestType.MARK_AS_READ, authentication, id, null);
                 HttpHelper.getResponse(request);
             }
-            catch (WebException)
+            catch (WebException ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw createNotificationException(ex);
             }
+        }
+
+        private static NotificationException createNotificationException(WebException ex)
+        {
+            NotificationException exception;
+            if (ex.Status == WebExceptionStatus.ProtocolError)
+            {
+                var response = ex.Response as HttpWebResponse;
+                if (response != null)
+                {
+                    exception = new NotificationException((int)response.StatusCode, ex.Message);
+                }
+                else
+                {
+                    exception = new NotificationException(ex.Message);
+                }
+            }
+            else
+            {
+                exception = new NotificationException(ex.Message);
+            }
+
+            return exception;
+        }
+
+        private static NotificationException createNotificationException(Exception ex)
+        {
+            return new NotificationException(ex.Message);
         }
     }
 }

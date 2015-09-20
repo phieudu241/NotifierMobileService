@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NotifierMobileService.Enums
+namespace NotifierMobile.Enums
 {
     public enum NotificationType
     {
