@@ -11,7 +11,7 @@ namespace NotifierMobile.Utils
 {
     class HttpHelper
     {
-        public const int CONNECTION_TIMEOUT = 5000;
+        public const int CONNECTION_TIMEOUT = 8000;
         
         public static WebRequest createGetRequest(RequestType requestType, Authentication authentication, int? id, int? type, bool? unread, int? fromId)
         {
@@ -47,7 +47,7 @@ namespace NotifierMobile.Utils
             return request;
         }
         
-        public static WebRequest createRequest(RequestType type, Authentication authentication, int? id, IRequestModel model)
+        public static WebRequest createRequest(RequestType type, Authentication authentication, int? id, Notification model)
         {
             HttpRequestAttr requestAttrs = (HttpRequestAttr) type.GetAttr();
             WebRequest request;
@@ -61,6 +61,7 @@ namespace NotifierMobile.Utils
 
             request = WebRequest.Create(url);
             request.Method = requestAttrs.Method;
+            
             if (model != null)
             {
                 request.ContentType = "application/json";
@@ -69,7 +70,11 @@ namespace NotifierMobile.Utils
                 {
                     string json = model.GenerateJsonString();
                     streamWriter.Write(json);
-                }    
+                }
+            }
+            else
+            {
+                request.ContentLength = 0;
             }
 
             request.Timeout = CONNECTION_TIMEOUT;

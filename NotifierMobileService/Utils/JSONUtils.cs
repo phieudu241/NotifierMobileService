@@ -38,7 +38,7 @@ namespace NotifierMobile.Utils
             notification.Title = jsonObject["Title"].str;
             notification.Message = jsonObject["Message"].str;
             notification.UnRead = jsonObject["UnRead"].b;
-            notification.CreatedDate = DateTime.Parse(jsonObject["CreatedDate"].str);
+            notification.CreateDate = DateTime.Parse(jsonObject["CreateDate"].str);
             return notification;
         }
 

@@ -9,6 +9,7 @@ namespace NotifierMobile.Exceptions
     {
         private int httpStatus { get ; set; }
         public string errorMessage { get; set; }
+        public Exception exception { get; set; }
 
         public NotificationException(int httpStatus)
         {
@@ -19,6 +20,13 @@ namespace NotifierMobile.Exceptions
         {
             httpStatus = -1;
             this.errorMessage = errorMessage;
+        }
+
+        public NotificationException(string errorMessage, Exception exception)
+        {
+            httpStatus = -1;
+            this.errorMessage = errorMessage;
+            this.exception = exception;
         }
 
         public NotificationException(int httpStatus, string errorMessage)

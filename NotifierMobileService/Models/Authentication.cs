@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NotifierMobile.Models
 {
-    public class Authentication : IRequestModel
+    public class Authentication
     {
         public string Username { get; set; }
         public string SecretKey { get; set; }
@@ -16,15 +16,6 @@ namespace NotifierMobile.Models
         {
             this.Username = Username;
             this.SecretKey = SecretKey;
-        }
-
-        public string GenerateJsonString()
-        {
-            JSONObject json = new JSONObject();
-            json.AddField("Username", Username);
-            json.AddField("SecretKey", SecretKey);
-
-            return json.Print();
         }
     }
 }

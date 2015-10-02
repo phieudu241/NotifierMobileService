@@ -16,13 +16,13 @@ namespace Tester
             NotifierMobileService.GetAll(authentication, null, null, null);
             NotifierMobileService.Get(5, authentication);
 
-            AddModel addModel = new AddModel();
+            Notification addModel = new Notification();
             addModel.Title = "title";
             addModel.Message = "message";
             addModel.CreateDate = DateTime.Now;
             NotifierMobileService.Add(authentication, addModel);
-            
-            UpdateModel updateModel = new UpdateModel();
+
+            Notification updateModel = new Notification();
             updateModel.Message = "update";
             updateModel.Title = "update";
             updateModel.Type = 2;
@@ -30,7 +30,7 @@ namespace Tester
 
             NotifierMobileService.MarkAsRead(5, authentication);
 
-            NotifierMobileService.Delete(31, authentication);
+            NotifierMobileService.Delete(73, authentication);
 
         }
     }

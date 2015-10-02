@@ -95,7 +95,7 @@ namespace NotifierMobile
         /// Add a new notification
         /// </summary>
         /// <param name="model"></param>
-        public static void Add(Authentication authentication, AddModel model)
+        public static void Add(Authentication authentication, Notification model)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace NotifierMobile
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
-        public static void Update(int id, Authentication authentication, UpdateModel model)
+        public static void Update(int id, Authentication authentication, Notification model)
         {
             try
             {
@@ -191,12 +191,12 @@ namespace NotifierMobile
                 }
                 else
                 {
-                    exception = new NotificationException(ex.Message);
+                    exception = new NotificationException(ex.Message, ex);
                 }
             }
             else
             {
-                exception = new NotificationException(ex.Message);
+                exception = new NotificationException(ex.Message, ex);
             }
 
             return exception;
@@ -204,7 +204,7 @@ namespace NotifierMobile
 
         private static NotificationException createNotificationException(Exception ex)
         {
-            return new NotificationException(ex.Message);
+            return new NotificationException(ex.Message, ex);
         }
     }
 }
