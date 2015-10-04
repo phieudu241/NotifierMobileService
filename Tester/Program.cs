@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NotifierMobile;
 using NotifierMobile.Models;
+using NotifierMobile.Enums;
 
 namespace Tester
 {
@@ -19,14 +20,15 @@ namespace Tester
             Notification addModel = new Notification();
             addModel.Title = "title";
             addModel.Message = "message";
+            addModel.Type = (int) NotificationType.INFO;
             addModel.CreateDate = DateTime.Now;
-            NotifierMobileService.Add(authentication, addModel);
+            NotifierMobileService.Add(addModel, authentication);
 
             Notification updateModel = new Notification();
             updateModel.Message = "update";
             updateModel.Title = "update";
             updateModel.Type = 2;
-            NotifierMobileService.Update(20, authentication, updateModel);
+            NotifierMobileService.Update(20, updateModel, authentication);
 
             NotifierMobileService.MarkAsRead(5, authentication);
 

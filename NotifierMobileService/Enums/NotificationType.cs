@@ -5,10 +5,10 @@ using System.Text;
 
 namespace NotifierMobile.Enums
 {
-    public enum NotificationType
+    public enum NotificationType : int
     {
-        INFO,
-        WARNING,
-        ERROR
+        INFO = 0,
+        WARNING = 1,
+        ERROR = 2
     }
 }

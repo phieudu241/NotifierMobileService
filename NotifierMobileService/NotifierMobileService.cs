@@ -15,6 +15,17 @@ namespace NotifierMobile
 {
     public class NotifierMobileService
     {
+        
+        /// <summary>
+        /// Get all notifications
+        /// </summary>
+        /// <param name="authentication"></param>
+        /// <returns></returns>
+        public static List<Notification> GetAll(Authentication authentication)
+        {
+            return GetAll(authentication, null, null, null);
+        }
+
         /// <summary>
         /// Get notifications by type
         /// </summary>
@@ -36,9 +47,21 @@ namespace NotifierMobile
         {
             return GetAll(authentication, null, unread, null);
         }
-        
+
         /// <summary>
         /// Get notifications by type and unread
+        /// </summary>
+        /// <param name="authentication"></param>
+        /// <param name="type"></param>
+        /// <param name="unread"></param>
+        /// <returns></returns>
+        public static List<Notification> GetAll(Authentication authentication, int type, bool unread)
+        {
+            return GetAll(authentication, type, unread, null);
+        }
+        
+        /// <summary>
+        /// Get notifications by type and unread and fromId
         /// </summary>
         /// <param name="authentication"></param>
         /// <param name="type"></param>
@@ -95,7 +118,7 @@ namespace NotifierMobile
         /// Add a new notification
         /// </summary>
         /// <param name="model"></param>
-        public static void Add(Authentication authentication, Notification model)
+        public static void Add(Notification model, Authentication authentication)
         {
             try
             {
@@ -117,7 +140,7 @@ namespace NotifierMobile
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
-        public static void Update(int id, Authentication authentication, Notification model)
+        public static void Update(int id, Notification model, Authentication authentication)
         {
             try
             {
