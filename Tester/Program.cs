@@ -28,11 +28,12 @@ namespace Tester
             updateModel.Message = "update";
             updateModel.Title = "update";
             updateModel.Type = 2;
+
             NotifierMobileService.Update(20, updateModel, authentication);
 
             NotifierMobileService.MarkAsRead(5, authentication);
 
-            NotifierMobileService.Delete(21, authentication);
+            NotifierMobileService.Delete(19, authentication);
 
         }
     }

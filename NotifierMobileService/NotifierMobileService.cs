@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
 using System.Net;
 using NotifierMobile.Models;
-using System.IO;
-using System.Collections.Specialized;
 using NotifierMobile.Utils;
 using NotifierMobile.Enums;
 using NotifierMobile.Exceptions;

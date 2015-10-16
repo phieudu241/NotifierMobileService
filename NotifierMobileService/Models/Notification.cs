@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace NotifierMobile.Models
 {
     public class Notification
     {
-        public Int32 Id { get; set; }
+        public int? Id { get; set; }
         public String Title { get; set; }
         public String Message { get; set; }
-        public Int32 Type { get; set; }
-        public Boolean UnRead { get; set; }
+        public int? Type { get; set; }
+        public bool? UnRead { get; set; }
         public DateTime CreateDate { get; set; }
 
         public Notification()
@@ -24,14 +21,14 @@ namespace NotifierMobile.Models
             this.Message = Message;
         }
 
-        public Notification(String Title, String Message, Int32 Type)
+        public Notification(String Title, String Message, int Type)
         {
             this.Title = Title;
             this.Message = Message;
             this.Type = Type;
         }
 
-        public Notification(String Title, String Message, Int32 Type, DateTime CreateDate)
+        public Notification(String Title, String Message, int Type, DateTime CreateDate)
         {
             this.Title = Title;
             this.Message = Message;
@@ -42,9 +39,9 @@ namespace NotifierMobile.Models
         public string GenerateJsonString()
         {
             JSONObject json = new JSONObject();
-            if (Id != null)
+            if (Id.HasValue)
             {
-                json.AddField("Id", Id);    
+                json.AddField("Id", Id.Value);    
             }
 
             if (Title != null)
@@ -57,9 +54,14 @@ namespace NotifierMobile.Models
                 json.AddField("Message", Message);
             }
 
-            if (Type != null)
+            if (Type.HasValue)
             {
-                json.AddField("Type", Type);
+                json.AddField("Type", Type.Value);
+            }
+
+            if (UnRead.HasValue)
+            {
+                json.AddField("UnRead", UnRead.Value);
             }
 
             if (CreateDate != null)
