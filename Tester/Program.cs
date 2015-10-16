@@ -32,7 +32,7 @@ namespace Tester
 
             NotifierMobileService.MarkAsRead(5, authentication);
 
-            NotifierMobileService.Delete(73, authentication);
+            NotifierMobileService.Delete(21, authentication);
 
         }
     }
