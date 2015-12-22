@@ -12,7 +12,7 @@ namespace Tester
     {
         static void Main(string[] args)
         {
-            Authentication authentication = new Authentication("test", "123");
+            Authentication authentication = new Authentication("test", "12345");
 
             NotifierMobileService.GetAll(authentication, null, null, null);
             NotifierMobileService.Get(5, authentication);
@@ -29,11 +29,11 @@ namespace Tester
             updateModel.Title = "update";
             updateModel.Type = 2;
 
-            NotifierMobileService.Update(20, updateModel, authentication);
+            NotifierMobileService.Update(5, updateModel, authentication);
 
             NotifierMobileService.MarkAsRead(5, authentication);
 
-            NotifierMobileService.Delete(19, authentication);
+            NotifierMobileService.Delete(90, authentication);
 
         }
     }

@@ -9,7 +9,7 @@ namespace NotifierMobile.Models
         public String Message { get; set; }
         public int? Type { get; set; }
         public bool? UnRead { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         public Notification()
         {
@@ -64,7 +64,7 @@ namespace NotifierMobile.Models
                 json.AddField("UnRead", UnRead.Value);
             }
 
-            if (CreateDate != null)
+            if (CreateDate.HasValue)
             {
                 json.AddField("CreateDate", CreateDate.ToString());
             }
